@@ -19,15 +19,27 @@ class VideosController extends Controller
 
     public function store(Request $request)
     {
+        // https://laravel.com/docs/8.x/validation#available-validation-rules
+        $this->validate($request, [
+            'title' => 'required|unique:videos|max:255',
+            'description' => 'required',
+            'director' => 'string',
+            'rating' => 'string',
+            'price' => 'integer',
+            'availability' => 'boolean'
+        ]);
+
+        $video = Video::create($request->all());
+
         return response()->json(
-            Video::create($request->getBody()),
+            $video,
             201
         );
     }
 
     public function update(Request $request, Video $video)
     {
-        $video->update($request->getBody());
+        $video->update($request->all());
         return response()->json($video, 200);
     }
 
