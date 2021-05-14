@@ -1,4 +1,5 @@
 import React from 'react';
+// TODO: Decide on a styling convention and replace all this
 const styles = "col-md-9 p-0 bg-white h-md-100 ";
 const inner = "d-md-flex h-md-100 p-5 justify-content-center flex-column";
 const center = "text-center";
