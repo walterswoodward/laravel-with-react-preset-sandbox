@@ -5,15 +5,9 @@ use App\Models\Video;
 use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Route;
 
-/**
-** Routes for a RESTful service:
-**
-** Route::get($uri, $action);
-** Route::post($uri, $action);
-** Route::put($uri, $action);
-** Route::delete($uri, $action);
-**
-**/
+Route::get('/', function () {
+    return view('welcome');
+});
 
 Route::get('videos', [VideosController::class, 'index']);
 Route::get('videos/{video}', [VideosController::class, 'show']);
