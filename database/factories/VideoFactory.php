@@ -27,7 +27,7 @@ class VideoFactory extends Factory
             'rating' => $this->faker->numberBetween(0, 10),
             'description' => $this->faker->text(),
             'price' => $this->faker->numberBetween(5, 20),
-            'availability' => true
+            'availability' => $this->faker->boolean(50),
         ];
     }
 }
