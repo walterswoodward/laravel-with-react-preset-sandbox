@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import Video from './Video.js';
 
 class App extends Component {
     constructor() {
         super();
         this.state = {
             videos: [],
+            currentVideo: null
         }
     }
 
@@ -19,22 +21,28 @@ class App extends Component {
             });
     }
 
+    handleClick(video) {
+        this.setState({currentVideo: video});
+    }
+
     renderVideos() {
         return this.state.videos.map(video => {
             return (
-                <li key={video.id}>{video.title}</li>
+                <button className="list-group-item btn" onClick={() => this.handleClick(video)} key={video.id}>{video.title}</button>
             );
         })
     }
 
     render() {
         return (
-            <div>
-                <ul>
-                    {this.renderVideos()}
-                </ul>
+            <div className="d-md-flex h-md-100 align-items-center">
+                <div className="col-md-3 p-0 bg-indigo h-md-100">
+                    <ul className="list-group">
+                        {this.renderVideos()}
+                    </ul>
+                </div>
+                <Video video={this.state.currentVideo} />
             </div>
-
         );
     }
 }
