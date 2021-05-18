@@ -16,8 +16,8 @@ async function logVideo(id) {
     //         console.log(response.data[id]);
     //     })
     //     // With Async Await:
-            let response = await getVideos();
-            console.log(response.data[id]);
+            let { data } = await getVideos();
+            console.log(data[id]);
     // }
 
 

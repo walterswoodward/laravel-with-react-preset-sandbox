@@ -2118,7 +2118,8 @@ function logVideo(_x) {
 
 function _logVideo() {
   _logVideo = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(id) {
-    var response;
+    var _yield$getVideos, data;
+
     return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
@@ -2127,10 +2128,11 @@ function _logVideo() {
             return getVideos();
 
           case 2:
-            response = _context.sent;
-            console.log(response.data[id]); // }
+            _yield$getVideos = _context.sent;
+            data = _yield$getVideos.data;
+            console.log(data[id]); // }
 
-          case 4:
+          case 5:
           case "end":
             return _context.stop();
         }
