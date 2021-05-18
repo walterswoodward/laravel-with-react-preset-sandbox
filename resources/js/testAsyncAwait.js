@@ -19,8 +19,6 @@ async function logVideo(id) {
             let { data: firstVideo } = await getVideos();
             console.log(firstVideo[id]);
     // }
-
-
 }
 
 logVideo(0);
