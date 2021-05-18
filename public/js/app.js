@@ -2078,6 +2078,37 @@ var Video = function Video(_ref) {
 
 /***/ }),
 
+/***/ "./resources/js/testAsyncAwait.js":
+/*!****************************************!*\
+  !*** ./resources/js/testAsyncAwait.js ***!
+  \****************************************/
+/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
+
+var _require = __webpack_require__(/*! axios */ "./node_modules/axios/index.js"),
+    axios = _require["default"];
+
+function getVideos() {
+  return axios.get('/videos');
+}
+
+function logVideos() {
+  var videos = getVideos();
+
+  if (getVideos() == undefined) {
+    console.log(videos[1]);
+  } else {
+    console.log('This does not work b/c axios.get returns a ' + videos + ' request is asynchronous and has not completed yet');
+    getVideos().then(function (response) {
+      console.log("Since axios.get returns a Promise, request data must be returned using the Promise.prototype.then() method:\n");
+      console.log(response.data[1]);
+    });
+  }
+}
+
+logVideos();
+
+/***/ }),
+
 /***/ "./node_modules/bootstrap/dist/js/bootstrap.js":
 /*!*****************************************************!*\
   !*** ./node_modules/bootstrap/dist/js/bootstrap.js ***!
@@ -68700,6 +68731,7 @@ if (false) {} else {
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
 /******/ 	__webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/js/app.js")))
+/******/ 	__webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/js/testAsyncAwait.js")))
 /******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/sass/app.scss")))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	

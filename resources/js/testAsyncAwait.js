@@ -1,0 +1,20 @@
+const { default: axios } = require("axios");
+
+function getVideos() {
+    return axios.get('/videos');
+}
+
+function logVideos() {
+    let videos = getVideos();
+    if (getVideos() == undefined) {
+        console.log(videos[1]);
+    } else {
+        console.log('This does not work b/c axios.get returns a ' + videos + ' request is asynchronous and has not completed yet');
+        getVideos().then(response => {
+            console.log("Since axios.get returns a Promise, request data must be returned using the Promise.prototype.then() method:\n");
+            console.log(response.data[1]);
+        })
+    }
+}
+
+logVideos();
