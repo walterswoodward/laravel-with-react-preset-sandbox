@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\VideosController;
+use App\Models\Video;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 
@@ -26,6 +27,7 @@ spl_autoload_register(function ($name) {
     }
 });
 
+// === Laravel Explained, Episode 2, Explain Real-time Facades From the Inside-Out ===
 // Example #1: Payment Class Called Directly
 Route::get('/testpaymentclass', function () {
     return (new \App\Payment())->process();
@@ -42,6 +44,72 @@ Route::get('/testrealtimefacades', function () {
 // spl_autoload_register above
 Route::get('/testrealtimefacade', function () {
     return RealTimeFacade\App\Payment::process();
+});
+
+// === Laravel Explained, Episode 3, Explain PHP Generators ===
+// Example #1 - Iterating with range()
+Route::get('/exhaustmemory', function () {
+    $items = range(1, 10000000);
+    return 'Done';
+});
+
+// Example #2 - Generator
+// customRange :: (int, int) -> Generator
+function customRange($begin, $end) {
+    for ($i = $begin; $i <= $end; $i++) {
+        yield $i;
+    }
+}
+
+function IsPrime($n)
+{
+    for ($x = 2; $x < $n; $x++) {
+        if ($n % $x == 0) {
+            return 0;
+        }
+    }
+    return 1;
+}
+
+Route::get('/generator', function() {
+    foreach(dump(customRange(1, 10000000)) as $i) {
+        if ($i < 1000 && isPrime($i)) {
+            dump($i);
+        }
+    };
+    return 'Done';
+});
+
+// Example #3: Iterating Over Generator
+// make :: int -> Generator
+function make($times) {
+    for ($i = 0; $i < $times; $i++) {
+        yield Video::factory()->create();
+    }
+}
+
+Route::get('/generatevideos', function () {
+    $videos = make(1000000); // Can change this to 1000000 w/o hitting memory limit
+    // $videos->current();
+    // $videos->next();
+    // $videos->current();
+    foreach($videos as $video) {
+        dump($video);
+    }
+    return 'Done';
+});
+
+// Example 4: LazyCollections:
+Route::get('/lazycollections', function () {
+    // Cursor creates an instance of LazyCollections
+    $videos = Video::cursor()->filter(function ($video) {
+        return $video->id;
+    });
+
+    foreach ($videos as $video) {
+        dump($video);
+    }
+    return 'Done';
 });
 
 Route::get('/', function () {
