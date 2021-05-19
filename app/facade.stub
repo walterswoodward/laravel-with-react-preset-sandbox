@@ -1,13 +1,13 @@
 <?php
 
-namespace RealTimeFacade\App;
+namespace {namespace};
 
 use Illuminate\Support\Facades\Facade;
 
-class Payment extends Facade
+class {className} extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        return \App\Payment::class;
+        return {accessor}::class;
     }
 }
