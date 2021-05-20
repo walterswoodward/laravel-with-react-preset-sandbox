@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Comment;
 use App\Models\Experience;
 use App\Models\Post;
 use App\Models\Profile;
@@ -21,8 +22,12 @@ class DatabaseSeeder extends Seeder
         for($i = 1; $i <= 10; $i++) {
             User::factory()->create();
             Video::factory()->create();
-            Post::factory(5)->create([ // 5 Posts for each user
+            Post::factory(5)->create([ // 5 posts for each user
                 'user_id' => $i,
+            ]);
+            Comment::factory(5)->create([ // 5 comments for each post
+                'user_id' => $i,
+                'post_id' => $i,
             ]);
             Profile::factory()->create([ // 1 profile for each user
                 'user_id' => $i
