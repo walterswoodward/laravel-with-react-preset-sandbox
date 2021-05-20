@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Experience;
 use App\Models\Profile;
 use App\Models\User;
 use App\Models\Video;
@@ -19,5 +20,6 @@ class DatabaseSeeder extends Seeder
         User::factory(10)->create();
         Video::factory(10)->create();
         Profile::factory(10)->create();
+        Experience::factory(10)->create();
     }
 }
